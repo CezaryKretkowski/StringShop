@@ -27,7 +27,7 @@ Default is
 ```cmd
    mvn clean install
 ```
-5. Next go to build/libs.
+5. Next go to target
 ```cmd
    cd target
 ```
