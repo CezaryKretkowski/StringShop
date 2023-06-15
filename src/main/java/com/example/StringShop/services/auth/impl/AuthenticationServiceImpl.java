@@ -6,7 +6,7 @@ import com.example.StringShop.dtos.auth.RegisterRequest;
 import com.example.StringShop.entites.user.Role;
 import com.example.StringShop.entites.user.User;
 import com.example.StringShop.repositories.UserRepositories;
-import com.example.StringShop.services.JwtService;
+import com.example.StringShop.services.auth.JwtService;
 import com.example.StringShop.services.auth.AuthenticationService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -25,22 +25,22 @@ public class AuthenticationServiceImpl implements AuthenticationService {
     @Override
     public AuthenticationResponse register(RegisterRequest registerRequest) {
         var user = User.builder()
-                .firstName(registerRequest.getFirstName())
-                .lastname(registerRequest.getLastname())
-                .email(registerRequest.getEmail())
-                .password(passwordEncoder.encode(registerRequest.getPassword()))
+                .firstName(registerRequest.firstName())
+                .lastname(registerRequest.lastname())
+                .email(registerRequest.email())
+                .password(passwordEncoder.encode(registerRequest.password()))
                 .role(Role.USER)
                 .build();
         userRepositories.save(user);
         var jwtToken = jwtService.generateToken(user);
-        return AuthenticationResponse.builder().token(jwtToken).build();
+        return new  AuthenticationResponse(jwtToken);
     }
 
     @Override
     public AuthenticationResponse authenticate(AuthenticationRequest authRequest) {
-        authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(authRequest.getEmail(),authRequest.getPassword()));
-        var user = userRepositories.findUserByEmail(authRequest.getEmail()).orElseThrow(); // todo Exeception user not found
+        authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(authRequest.email(),authRequest.password()));
+        var user = userRepositories.findUserByEmail(authRequest.email()).orElseThrow(); // todo Exeception user not found
         var jwtToken = jwtService.generateToken(user);
-        return AuthenticationResponse.builder().token(jwtToken).build();
+        return new  AuthenticationResponse(jwtToken);
     }
 }

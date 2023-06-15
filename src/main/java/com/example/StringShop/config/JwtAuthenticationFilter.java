@@ -1,6 +1,6 @@
 package com.example.StringShop.config;
 
-import com.example.StringShop.services.JwtService;
+import com.example.StringShop.services.auth.JwtService;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;

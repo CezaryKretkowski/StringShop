@@ -1,4 +1,4 @@
-package com.example.StringShop.services;
+package com.example.StringShop.services.auth;
 
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
