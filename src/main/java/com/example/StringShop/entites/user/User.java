@@ -1,5 +1,6 @@
 package com.example.StringShop.entites.user;
 
+import jakarta.annotation.Nullable;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -28,9 +29,12 @@ public class User implements UserDetails {
     private String lastname;
     private String email;
     private String password;
-
     @Enumerated(EnumType.STRING)
     private Role role;
+    @Nullable
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "address_id",referencedColumnName = "id")
+    private Address address;
 
 
     @Override

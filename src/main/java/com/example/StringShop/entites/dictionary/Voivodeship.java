@@ -1,22 +1,23 @@
-package com.example.StringShop.entites.Product;
+package com.example.StringShop.entites.dictionary;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.util.List;
-import java.util.Set;
 
-@Entity
 @Data
-@AllArgsConstructor
+@Builder
 @NoArgsConstructor
-public class Category {
+@AllArgsConstructor
+@Entity
+public class Voivodeship {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
-    private int id;
+    private long id;
     private String name;
-    @OneToMany(mappedBy = "category")
-    private List<Product> productList;
+    @OneToMany(mappedBy = "voivodeship")
+    private List<City> cities;
 }

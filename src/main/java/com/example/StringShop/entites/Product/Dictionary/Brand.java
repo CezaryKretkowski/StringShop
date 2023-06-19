@@ -19,6 +19,6 @@ public class Brand {
     private int id;
     private String name;
     @OneToMany(mappedBy = "brand")
-    private Set<Product> productList;
+    private List<Product> productList;
 }
 
